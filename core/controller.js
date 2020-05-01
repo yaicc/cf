@@ -11,9 +11,29 @@ class Controller {
     return this.ctx.success(r);
   }
 
+  /**
+   * 失败返回
+   */
+  error({ code = 500, message = '' }) {
+    return this.ctx.success({ code, message });
+  }
 
-  error() {
+  /**
+   * 获取body参数
+   * @param {String} name 
+   * @return { import("koa-bouncer").Validator }
+   */
+  getBody(name) {
+    return this.ctx.validateBody(name);
+  }
 
+  /**
+   * 获取body参数
+   * @param {String} name 
+   * @return { import("koa-bouncer").Validator }
+   */
+  getQuery(name) {
+    return this.ctx.validateQuery(name);
   }
 
 }

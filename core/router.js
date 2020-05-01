@@ -25,5 +25,6 @@ router.all('/:controller?/:action?', async (ctx, next) => {
 });
 
 module.exports = app => {
+  router.prefix('/:version');
   app.use(router.routes(), router.allowedMethods());
 };
