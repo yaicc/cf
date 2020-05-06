@@ -85,4 +85,8 @@ module.exports = (app) => {
     .use(bouncer.middleware())
     .use(logHandler)
     .use(staticHandler());
+
+  // 应用级中间件
+  Array.isArray(app.config.cfg.middlewares) &&
+    app.config.cfg.middlewares.forEach(middleware => app.use(app.middlewares[middleware]));
 };

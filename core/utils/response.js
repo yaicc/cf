@@ -29,9 +29,6 @@ const error = (ctx, err) => {
     code: err.code,
     message: err.message
   };
-  ctx.logger.error({
-    ...err
-  });
 };
 
 const unCaughtError = (ctx, err) => {

@@ -1,6 +1,6 @@
 const router = require('koa-router')();
 
-async function control(ctx) {
+async function control(ctx, next) {
   const { app, CONTROLLER, ACTION } = ctx;
   const { controllers } = app;
 
@@ -8,12 +8,15 @@ async function control(ctx) {
     throw Error('控制器不存在！');
   }
 
-  const $controller = new controllers[CONTROLLER](ctx);
-  if (!$controller[ACTION] || typeof $controller[ACTION] !== 'function') {
+  const $controller = new controllers[CONTROLLER](ctx, next);
+  // 下划线转驼峰
+  const $action = ACTION.indexOf('_') > 0 ? ACTION.replace(/\_(\w)/g, (_, letter) => letter.toUpperCase()) : ACTION;
+
+  if (!$controller[$action] || typeof $controller[$action] !== 'function') {
     throw Error('路由方法不存在');
   }
 
-  await $controller[ACTION]();
+  await $controller[$action]();
 }
 
 router.all('/:controller?/:action?', async (ctx, next) => {

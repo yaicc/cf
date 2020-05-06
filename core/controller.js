@@ -1,6 +1,27 @@
+const assert = require('assert');
+const DB = require('./utils/mysql');
+
 class Controller {
-  constructor(ctx) {
+  constructor(ctx, next) {
     this.ctx = ctx;
+    this.next = next;
+  }
+
+  get DB() {
+    return DB;
+  }
+
+  service(name) {
+    assert(this.ctx.app.services[name], 'invalid service');
+    return new this.ctx.app.services[name](this.ctx);
+  }
+
+  async middleware(name) {
+    const MIDDLE = this.ctx.app.middlewares[name];
+    if (!MIDDLE || typeof MIDDLE !== 'function') {
+      throw Error('invalid middleware');
+    }
+    return MIDDLE(this.ctx, this.next);
   }
 
   /**
