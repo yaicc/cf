@@ -18,7 +18,7 @@ exports.arr2Obj = (arr, identifier) => arr.reduce((a, b) => ({ ...a, [b[identifi
 /**
  * Check if a value is a number
  */
-exports.isNumber = value => !isNaN(parseFloat(value)) && isFinite(value);
+exports.isNumber = value => !Number.isNaN(parseFloat(value)) && Number.isFinite(value);
 
 /**
  * Wait for an amount of milliseconds

@@ -1,0 +1,30 @@
+{
+  "extends": ["airbnb-base", "prettier"],
+  "env": {
+    "es6": true,
+    "node": true,
+    "commonjs": true
+  },
+  "rules": {
+    "arrow-body-style": "off",
+    "func-names": "off",
+    "global-require": "off",
+    "guard-for-in": "off",
+    "no-await-in-loop": "off",
+    "no-continue": "off",
+    "no-empty": "off",
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
+    "no-restricted-properties": "off",
+    "no-restricted-syntax": "off",
+    "no-return-await": "off",
+    "no-throw-literal": "off",
+    "no-underscore-dangle": "off",
+    "no-use-before-define": "off",
+    "import/no-dynamic-require": "off",
+    "import/no-extraneous-dependencies": "off",
+    "class-methods-use-this": "off",
+    "prefer-destructuring": ["error", {"object": true, "array": false}],
+    "max-classes-per-file": "off"
+  }
+}

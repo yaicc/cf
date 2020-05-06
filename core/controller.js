@@ -16,14 +16,6 @@ class Controller {
     return new this.ctx.app.services[name](this.ctx);
   }
 
-  async middleware(name) {
-    const MIDDLE = this.ctx.app.middlewares[name];
-    if (!MIDDLE || typeof MIDDLE !== 'function') {
-      throw Error('invalid middleware');
-    }
-    return MIDDLE(this.ctx, this.next);
-  }
-
   /**
    * 成功返回
    * @param {*} res

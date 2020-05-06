@@ -10,7 +10,7 @@ async function control(ctx, next) {
 
   const $controller = new controllers[CONTROLLER](ctx, next);
   // 下划线转驼峰
-  const $action = ACTION.indexOf('_') > 0 ? ACTION.replace(/\_(\w)/g, (_, letter) => letter.toUpperCase()) : ACTION;
+  const $action = ACTION.indexOf('_') > 0 ? ACTION.replace(/_(\w)/g, (_, letter) => letter.toUpperCase()) : ACTION;
 
   if (!$controller[$action] || typeof $controller[$action] !== 'function') {
     throw Error('路由方法不存在');
