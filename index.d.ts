@@ -5,11 +5,11 @@ import * as KoaBouncer from "koa-bouncer";
 type Error<T = any> = { [code: string]: T; };
 
 declare namespace cf {
-  export interface App extends Koa {
+  export class App extends Koa {
     run(port: number): void
   }
   
-  export interface Controller {
+  export class Controller {
     constructor(ctx: Koa.Context, next: Koa.Next);
     DB: Knex;
     service(name: string): Service;
@@ -19,7 +19,7 @@ declare namespace cf {
     getQuery(name: string): KoaBouncer.Validator;
   }
   
-  export interface Service {
+  export class Service {
     constructor(ctx: Koa.Context);
     cursor: Knex.Table;
     service(name: string): Service;
