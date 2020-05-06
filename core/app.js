@@ -28,6 +28,4 @@ class Application extends Koa {
 
 }
 
-const app = new Application();
-
-module.exports = app;
+module.exports = Application;
