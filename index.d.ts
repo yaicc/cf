@@ -41,7 +41,7 @@ declare namespace cf {
     success(data: any): any;
     /**
      * Return error messgae with code & msg
-     * @param data
+     * @param error
      */
     error(error?: ErrorOption): any;
     /**

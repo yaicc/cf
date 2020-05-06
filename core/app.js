@@ -4,26 +4,30 @@ const config = require('./config');
 const middleware = require('./middleware');
 const router = require('./router');
 
-const app = new Koa();
+class Application extends Koa {
 
-app.run = (port = 3000) => {
-  const loader = new Loader();
+  run(port = 3000) {
+    const loader = new Loader();
 
-  // 装载配置文件
-  app.config = config;
-  // 装载控制器
-  app.controllers = loader.loadController();
-  // 装载中间件
-  app.middlewares = loader.loadMiddleware();
-  // 装载逻辑处理类
-  app.services = loader.loadServices();
+    // 装载配置文件
+    this.config = config;
+    // 装载控制器
+    this.controllers = loader.loadController();
+    // 装载中间件
+    this.middlewares = loader.loadMiddleware();
+    // 装载逻辑处理类
+    this.services = loader.loadServices();
 
-  // 中间件
-  middleware(app);
-  // 路由
-  router(app);
+    // 中间件
+    middleware(this);
+    // 路由
+    router(this);
 
-  app.listen(port);
-};
+    this.listen(port);
+  }
+
+}
+
+const app = new Application();
 
 module.exports = app;
