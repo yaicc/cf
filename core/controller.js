@@ -54,11 +54,11 @@ class Controller {
    * @param {Any} value 
    */
   state(key, value = null) {
-    if (!value) {
+    if (value) {
       this.ctx.state[key] = value;
       return value;
     }
-    return this.ctx.state[key];
+    return this.ctx.state[key] || null;
   }
 
 }
