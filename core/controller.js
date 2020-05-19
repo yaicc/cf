@@ -28,7 +28,7 @@ class Controller {
    * 失败返回
    */
   error({ code = 500, message = '' }) {
-    return this.ctx.success({ code, message });
+    return this.ctx.error({ code, message });
   }
 
   /**
