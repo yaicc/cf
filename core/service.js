@@ -1,5 +1,6 @@
 const assert = require('assert');
 const DB = require('./utils/mysql');
+const Redis = require('./utils/redis');
 
 class Service {
   constructor(ctx) {
@@ -8,6 +9,10 @@ class Service {
 
   get DB() {
     return DB;
+  }
+
+  get Redis() {
+    return Redis;
   }
 
   get cursor() {

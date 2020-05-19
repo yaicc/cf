@@ -1,6 +1,7 @@
 import * as Koa from "koa";
 import * as Knex from "knex";
 import * as KoaBouncer from "koa-bouncer";
+import * as IORedis from "ioredis";
 
 interface ErrorOption {
   code?: 500,
@@ -8,6 +9,13 @@ interface ErrorOption {
 }
 
 declare namespace cf {
+
+  type OK = 'OK';
+
+  class Redis extends IORedis {
+    async read(key: string): Promise<any>;
+    async write(key: string, value: any, expire: number): Promise<OK>
+  }
 
   /**
    * Application entry extend Koa.
@@ -29,6 +37,10 @@ declare namespace cf {
      * Database instance
      */
     DB: Knex;
+    /**
+     * Redis instance
+     */
+    Redis: Redis;
     /**
      * Fetch service of name
      * @param name serveice name
@@ -71,6 +83,10 @@ declare namespace cf {
      * Database instance
      */
     DB: Knex;
+    /**
+     * Redis instance
+     */
+    Redis: Redis;
     /**
      * Cursor of service talbe
      */
