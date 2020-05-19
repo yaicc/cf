@@ -24,3 +24,8 @@ exports.isNumber = value => !Number.isNaN(parseFloat(value)) && Number.isFinite(
  * Wait for an amount of milliseconds
  */
 exports.sleep = async (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+
+/**
+ * Rand number between given numbers
+ */
+exports.rand = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));

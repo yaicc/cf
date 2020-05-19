@@ -112,6 +112,12 @@ declare namespace cf {
      * @param milliseconds 
      */
     function sleep(milliseconds: number): Promise<any>;
+    /**
+     * Rand number between given numbers
+     * @param min
+     * @param max
+     */
+    function rand(min: number, max: number): number;
   }
 }
 
