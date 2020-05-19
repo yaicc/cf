@@ -72,7 +72,9 @@ const staticHandler = () => {
     fs.accessSync(staticDir, fs.F_OK);
     return koaStatic(staticDir);
   } catch (_) {
-    return () => {};  
+    return async (ctx, next) => {
+      await next();
+    };
   }
 };
 
