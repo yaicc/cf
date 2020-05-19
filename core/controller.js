@@ -49,6 +49,18 @@ class Controller {
     return this.ctx.validateQuery(name);
   }
 
+  /**
+   * @param {String} key 
+   * @param {Any} value 
+   */
+  state(key, value = null) {
+    if (!value) {
+      this.ctx.state[key] = value;
+      return value;
+    }
+    return this.ctx.state[key];
+  }
+
 }
 
 module.exports = Controller;

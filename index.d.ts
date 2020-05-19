@@ -54,6 +54,12 @@ declare namespace cf {
      * @param name param name
      */
     getQuery(name: string): KoaBouncer.Validator;
+    /**
+     * Fetch/Set state of Context
+     * @param key param key
+     * @param value param value
+     */
+    state(key: string, value?: any): any;
   }
   
   /**
