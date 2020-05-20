@@ -42,6 +42,18 @@ declare namespace cf {
      */
     Redis: Redis;
     /**
+     * Http method of GET/POST/PUT/DELETE
+     */
+    Method: string;
+    /**
+     * Http method is POST?
+     */
+    isPost: boolean;
+    /**
+     * Http method is GET?
+     */
+    isGet: boolean;
+    /**
      * Fetch service of name
      * @param name serveice name
      */

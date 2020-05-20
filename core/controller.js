@@ -16,6 +16,18 @@ class Controller {
     return Redis;
   }
 
+  get Method() {
+    return this.ctx.request.method;
+  }
+
+  get isPost() {
+    return this.Method === 'POST';
+  }
+
+  get isGet() {
+    return this.Method === 'GET';
+  }
+
   service(name) {
     assert(this.ctx.app.services[name], 'invalid service');
     return new this.ctx.app.services[name](this.ctx);
