@@ -146,6 +146,10 @@ declare namespace cf {
      * @param max
      */
     function rand(min: number, max: number): number;
+    /**
+     * uniqueId
+     */
+    function uniqueId(): string;
   }
 }
 

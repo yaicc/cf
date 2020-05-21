@@ -29,3 +29,16 @@ exports.sleep = async (milliseconds) => new Promise((resolve) => setTimeout(reso
  * Rand number between given numbers
  */
 exports.rand = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
+
+exports.uniqueId = () => {
+  const chs = ['a','b','c','d','e','f','g','h','j','k','l','m','n','p','q','r','s','t','u','w','x','y','z','0','1','2','3','4','5','6','7','8','9'];
+  const [, ns] = process.hrtime();
+  const ts = `${(Date.now() * 1e4 + ns).toString()}`;
+
+  const output = [];
+  for (let i = 0; i < 16; i++) {
+    const piece = `${ts[i + 1]}${ts[i + 2]}${ts[i + 3]}` * 1;
+    output.push(chs[piece % chs.length]);
+  }
+  return output.join('');
+}
