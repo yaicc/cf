@@ -13,8 +13,8 @@ declare namespace cf {
   type OK = 'OK';
 
   class Redis extends IORedis {
-    async read(key: string): Promise<any>;
-    async write(key: string, value: any, expire: number): Promise<OK>
+    read(key: string): Promise<any>;
+    write(key: string, value: any, expire: number): Promise<OK>
   }
 
   /**
@@ -129,7 +129,7 @@ declare namespace cf {
      * @param arr 
      * @param identifier 
      */
-    function arr2Obj(arr: array, identifier: string): object;
+    function arr2Obj(arr: [any], identifier: string): object;
     /**
      * Check if a value is a number
      * @param value 
