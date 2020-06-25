@@ -3,6 +3,7 @@ const cors = require('koa2-cors');
 const bodyparser = require('koa-bodyparser');
 const bouncer = require('koa-bouncer');
 const koaStatic = require('koa-static');
+const { v4: uuidv4 } = require('uuid');
 const response = require('./utils/response');
 const log4js = require('./utils/logger');
 
@@ -51,7 +52,6 @@ const logHandler = async (ctx, next) => {
     type: 'IN',
     method: ctx.request.method,
     url: ctx.request.url,
-    traceId: ctx.state.traceId,
     header: ctx.request.header,
     query: ctx.request.query,
     body: ctx.request.body
@@ -61,7 +61,6 @@ const logHandler = async (ctx, next) => {
     type: 'OUT',
     status: ctx.response.status,
     message: ctx.response.message,
-    traceId: ctx.state.traceId,
     body: ctx.body
   });
 };
@@ -78,6 +77,11 @@ const staticHandler = () => {
   }
 };
 
+const traceId = async (ctx, next) => {
+  ctx.state.traceId = uuidv4();
+  await next();
+};
+
 module.exports = (app) => {
   app
     .use(bodyparser({ enableTypes: ['json', 'form', 'text']}))
@@ -85,6 +89,7 @@ module.exports = (app) => {
     .use(errorHandler)
     .use(corsHandler)
     .use(bouncer.middleware())
+    .use(traceId)
     .use(logHandler)
     .use(staticHandler());
 

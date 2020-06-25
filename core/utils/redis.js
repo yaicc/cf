@@ -4,10 +4,12 @@ class Redis extends IORedis {
 
   async read(key) {
     let rs = await this.get(key);
-    try {
-      rs = JSON.parse(rs);
-    } catch (_) {
-      // ignore
+    if (rs) {
+      try {
+        rs = JSON.parse(rs);
+      } catch (_) {
+        // ignore
+      }
     }
     return rs;
   }
@@ -20,6 +22,15 @@ class Redis extends IORedis {
       return this.setex(key, expire, value);
     }
     return this.set(key, value);
+  }
+
+  async auto(key, expire, closure) {
+    let r = await this.read(key);
+    if (!r) {
+      r = await closure();
+      await this.write(key, r, expire);
+    }
+    return r;
   }
 
 }

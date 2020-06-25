@@ -14,7 +14,8 @@ declare namespace cf {
 
   class Redis extends IORedis {
     read(key: string): Promise<any>;
-    write(key: string, value: any, expire: number): Promise<OK>
+    write(key: string, value: any, expire: number): Promise<OK>;
+    auto(key: string, expire: number, closure: () => any): Promise<any>;
   }
 
   /**

@@ -4,6 +4,7 @@ const success = (ctx, data) => {
     message: 'success',
     data
   };
+  ctx.set('trace-id', ctx.state.traceId);
 };
 
 const error = (ctx, err) => {
@@ -29,6 +30,7 @@ const error = (ctx, err) => {
     code: err.code,
     message: err.message
   };
+  ctx.set('trace-id', ctx.state.traceId);
 };
 
 const unCaughtError = (ctx, err) => {
@@ -44,6 +46,7 @@ const unCaughtError = (ctx, err) => {
     code: err.code,
     message: process.env.NODE_ENV === 'production' ? 'bad request' : err.message
   };
+  ctx.set('trace-id', ctx.state.traceId);
   ctx.logger.warn({
     ...err
   });
@@ -52,7 +55,6 @@ const unCaughtError = (ctx, err) => {
     type: 'OUT',
     status: ctx.response.status,
     message: ctx.response.message,
-    traceId: ctx.state.traceId,
     body: ctx.body
   });
 };
